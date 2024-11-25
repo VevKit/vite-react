@@ -6,5 +6,4 @@ declare namespace NodeJS {
   }
 }
 
-// Add Vite-specific ENV
 /// <reference types="vite/client" />
