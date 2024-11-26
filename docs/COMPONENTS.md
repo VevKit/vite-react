@@ -141,3 +141,30 @@ const [value, setValue] = useState('');
   placeholder="Controlled Input"
 />
 ```
+
+### Container
+
+A responsive container component that centers content and provides consistent spacing.
+
+#### Basic Usage
+
+```tsx
+// Basic container
+<Container>Content here</Container>
+
+// Different sizes
+<Container size="sm">Small container</Container>
+<Container size="md">Medium container</Container>
+<Container size="lg">Large container</Container>
+<Container size="xl">Extra large container</Container>
+<Container size="full">Full width container</Container>
+
+// Without padding
+<Container padding={false}>No padding</Container>
+
+// Without max-width
+<Container maxWidth={false}>No max-width</Container>
+
+// With custom element
+<Container as="section">As a section</Container>
+```
