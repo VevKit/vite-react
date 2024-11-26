@@ -168,3 +168,28 @@ A responsive container component that centers content and provides consistent sp
 // With custom element
 <Container as="section">As a section</Container>
 ```
+
+### Card
+
+A versatile card component for grouped content.
+
+```tsx
+// Basic card
+<Card>Card content</Card>
+
+// Variants
+<Card variant="elevated">Elevated Card</Card>
+<Card variant="outlined">Outlined Card</Card>
+<Card variant="filled">Filled Card</Card>
+
+// Without padding
+<Card padding={false}>No padding</Card>
+
+// With hover effect
+<Card hover>Hoverable card</Card>
+
+// Combined props
+<Card variant="outlined" hover className="custom-class">
+  Custom card with hover
+</Card>
+```
