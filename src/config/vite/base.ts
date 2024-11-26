@@ -1,9 +1,8 @@
 /// <reference types="vite/client" />
 
 import { UserConfig } from 'vite';
+
 import { loadEnvConfig, AppConfig } from '../env';
-
-
 
 interface ConfigOptions {
   command: 'build' | 'serve';
@@ -17,7 +16,7 @@ export async function resolveConfig({ command, mode }: ConfigOptions): Promise<U
 
   return {
     base: '/',
-    
+
     resolve: {
       alias: {
         '@': '/src',
@@ -62,10 +61,7 @@ export async function resolveConfig({ command, mode }: ConfigOptions): Promise<U
 
     css: {
       postcss: {
-        plugins: [
-          require('tailwindcss'),
-          require('autoprefixer'),
-        ],
+        plugins: [require('tailwindcss'), require('autoprefixer')],
       },
       modules: {
         localsConvention: 'camelCase',
