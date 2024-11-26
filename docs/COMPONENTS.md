@@ -7,6 +7,7 @@ This document provides examples and documentation for all components available i
 - [Core Components](#core-components)
   - [Button](#button)
   - [Typography](#typography)
+  - [Input](#input)
 
 ## Core Components
 
@@ -87,4 +88,56 @@ import { Typography } from '@vevkit/vite-react';
 
 // Custom Element
 <Typography variant="body1" as="label">Form Label</Typography>
+```
+
+### Input
+
+A flexible input component that supports multiple variants, sizes, and states.
+
+#### Basic Usage
+
+```tsx
+// Basic
+<Input placeholder="Enter your name" />
+
+// Variants
+<Input variant="outline" placeholder="Outline Input" />
+<Input variant="filled" placeholder="Filled Input" />
+<Input variant="flushed" placeholder="Flushed Input" />
+<Input variant="unstyled" placeholder="Unstyled Input" />
+
+// Sizes
+<Input size="sm" placeholder="Small Input" />
+<Input size="md" placeholder="Medium Input" />
+<Input size="lg" placeholder="Large Input" />
+
+// Types
+<Input type="text" placeholder="Text Input" />
+<Input type="password" placeholder="Password Input" />
+<Input type="email" placeholder="Email Input" />
+<Input type="number" placeholder="Number Input" />
+<Input type="tel" placeholder="Phone Input" />
+<Input type="url" placeholder="URL Input" />
+<Input type="search" placeholder="Search Input" />
+
+// States
+<Input isDisabled placeholder="Disabled Input" />
+<Input isReadOnly value="Read-only Input" />
+<Input isRequired placeholder="Required Input" />
+<Input isInvalid error="This field is invalid" placeholder="Invalid Input" />
+
+// With Error Message
+<Input
+  placeholder="Email"
+  isInvalid
+  error="Please enter a valid email address"
+/>
+
+// Controlled Input
+const [value, setValue] = useState('');
+<Input
+  value={value}
+  onChange={(e) => setValue(e.target.value)}
+  placeholder="Controlled Input"
+/>
 ```
