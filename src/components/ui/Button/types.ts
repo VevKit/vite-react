@@ -1,3 +1,5 @@
+// src/components/ui/Button/types.ts
+
 import { ComponentBaseProps, ComponentSize } from '@/types/components';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'destructive' | 'link';
