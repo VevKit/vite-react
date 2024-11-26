@@ -1,7 +1,3 @@
-import type { ElementType } from 'react';
-
-import type { ComponentBaseProps } from '@/types/components';
-
 export type TypographyVariant =
   | 'h1'
   | 'h2'
@@ -20,10 +16,17 @@ export type TypographyAlign = 'left' | 'center' | 'right' | 'justify';
 
 export type TypographyWeight = 'light' | 'normal' | 'medium' | 'semibold' | 'bold';
 
-export interface TypographyProps extends Omit<ComponentBaseProps<TypographyVariant>, 'size'> {
+export interface TypographyStyleProps {
+  variant: TypographyVariant;
+  align: TypographyAlign;
+  weight: TypographyWeight;
+  color: string;
+}
+
+export interface TypographyBaseProps {
+  variant?: TypographyVariant;
   align?: TypographyAlign;
   weight?: TypographyWeight;
-  as?: ElementType;
   truncate?: boolean;
   color?: string;
 }

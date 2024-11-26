@@ -2,8 +2,7 @@
 // import { ModalEntry } from '@/components/ui/core/modal';
 import Button from '@/components/ui/react/Button';
 import { useModal, Modal } from '@/components/ui/react/Modal';
-
-import { Typography } from '@/components/ui/react/Typography';
+import Typography from '@/components/ui/react/Typography';
 
 const ExampleModal = ({ id, isOpen }: { id: string; isOpen: boolean }) => {
   return (
