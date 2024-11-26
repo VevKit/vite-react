@@ -1,31 +1,20 @@
-import { BaseProps } from '../common';
+import type { BaseProps } from '../common';
 
-export interface ComponentBaseProps extends BaseProps {
-  variant?: 'primary' | 'secondary' | 'ghost';
-  size?: 'sm' | 'md' | 'lg';
+// Base size type that can be extended
+export type ComponentSize = 'sm' | 'md' | 'lg';
+
+// Generic base props interface
+export interface ComponentBaseProps<
+  TVariant extends string = 'primary' | 'secondary' | 'ghost',
+  TSize extends string = ComponentSize,
+> extends BaseProps {
+  variant?: TVariant;
+  size?: TSize;
   disabled?: boolean;
 }
 
-export interface ButtonProps extends ComponentBaseProps {
-  type?: 'button' | 'submit' | 'reset';
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  loading?: boolean;
-}
+// Helper type for extracting variant types
+export type ExtractVariant<T> = T extends ComponentBaseProps<infer V> ? V : never;
 
-export interface InputProps extends ComponentBaseProps {
-  type?: 'text' | 'password' | 'email' | 'number';
-  value?: string | number;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  placeholder?: string;
-  error?: string;
-}
-
-export interface MenuProps extends ComponentBaseProps {
-  open?: boolean;
-  onClose?: () => void;
-}
-
-export interface TooltipProps extends BaseProps {
-  content: React.ReactNode;
-  position?: 'top' | 'right' | 'bottom' | 'left';
-}
+// Helper type for extracting size types
+export type ExtractSize<T> = T extends ComponentBaseProps<any, infer S> ? S : never;
