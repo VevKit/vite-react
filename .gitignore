@@ -1,17 +1,15 @@
-# .gitignore
 # Dependencies
 node_modules
 .pnp
 .pnp.js
+package-lock.json
 
 # Testing
 coverage
-*.lcov
 
 # Build
 dist
 build
-out
 
 # Environment
 .env
@@ -41,14 +39,3 @@ lerna-debug.log*
 
 # System
 .DS_Store
-*.pem
-
-# Package manager
-.npm
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
-package-lock.json
