@@ -18,3 +18,15 @@ npm create @vevkit/vite-react my-app
 cd my-app
 npm install
 npm run dev
+```
+
+### Example env usage in a component
+```typescript
+import { loadEnvConfig } from '@/config/env';
+
+const config = loadEnvConfig();
+
+// Type-safe access to environment variables
+console.log(config.apiUrl);
+console.log(config.features.analytics);
+```

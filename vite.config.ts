@@ -5,6 +5,7 @@ import { resolveConfig } from './src/config/vite/base';
 
 export default defineConfig(async ({ command, mode }) => {
   const config = await resolveConfig({ command, mode });
+  
   return {
     ...config,
     plugins: [

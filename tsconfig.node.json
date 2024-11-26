@@ -9,6 +9,7 @@
   },
   "include": [
     "vite.config.ts",
-    "src/config/vite/**/*.ts"
+    "src/config/vite/**/*.ts",
+    "src/config/*.ts"
   ]
 }

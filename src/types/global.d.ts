@@ -1,3 +1,5 @@
+/// <reference types="vite/types/importMeta.d.ts" />
+/// <reference types="vite/client" />
 declare namespace NodeJS {
   interface ProcessEnv {
     NODE_ENV: 'development' | 'production' | 'test'
@@ -5,5 +7,3 @@ declare namespace NodeJS {
     [key: string]: string | undefined
   }
 }
-
-/// <reference types="vite/client" />
