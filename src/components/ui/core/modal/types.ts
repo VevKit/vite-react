@@ -18,3 +18,13 @@ export interface ModalStore {
   pop: (id: string) => void;
   clear: () => void;
 }
+
+export interface ModalVariants {
+  size: 'sm' | 'md' | 'lg' | 'xl' | 'full';
+  position: 'center' | 'top' | 'right' | 'bottom' | 'left';
+}
+
+export interface ModalStyleProps extends ModalVariants {
+  isFullScreen?: boolean;
+  noPadding?: boolean;
+}

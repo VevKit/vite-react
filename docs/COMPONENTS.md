@@ -245,78 +245,116 @@ const MyComponent = () => {
 #### Modal Variants
 
 ```tsx
-// Basic Modal
-<Modal id="basic" isOpen={isOpen}>
+// Basic example
+<Modal
+  id="basic"
+  isOpen={isOpen}
+  onClose={() => setIsOpen(false)}
+>
   <p>Basic modal content</p>
 </Modal>
 
-// With Title and Description
+// With header
 <Modal
   id="with-header"
   isOpen={isOpen}
-  title="Modal Title"
-  description="This is a description of the modal"
+  title="Welcome Back!"
+  description="Sign in to your account to continue"
+  onClose={() => setIsOpen(false)}
 >
-  <p>Modal content</p>
+  {/* Login form */}
 </Modal>
 
-// Custom Styling
+// Different sizes
+<Modal id="small" size="sm" isOpen={isOpen}>
+  <p>Small modal</p>
+</Modal>
+
+<Modal id="large" size="lg" isOpen={isOpen}>
+  <p>Large modal</p>
+</Modal>
+
+// Different positions
+<Modal id="top" position="top" isOpen={isOpen}>
+  <p>Top modal</p>
+</Modal>
+
+<Modal id="right" position="right" isOpen={isOpen}>
+  <p>Right modal</p>
+</Modal>
+
+// Full screen
+<Modal
+  id="fullscreen"
+  isOpen={isOpen}
+  isFullScreen
+>
+  <p>Full screen modal</p>
+</Modal>
+
+// No padding
+<Modal
+  id="no-padding"
+  isOpen={isOpen}
+  noPadding
+>
+  <img src="hero.jpg" alt="Hero" className="rounded-lg" />
+</Modal>
+
+// Custom styling
 <Modal
   id="custom"
   isOpen={isOpen}
-  className="max-w-2xl bg-gray-100"
+  className="bg-gray-900 text-white"
 >
   <p>Custom styled modal</p>
 </Modal>
 
-// With Close Handler
-<Modal
-  id="with-close"
-  isOpen={isOpen}
-  onClose={() => {
-    // Handle close
-  }}
->
-  <p>Modal with close handler</p>
-</Modal>
+// Custom modal using base Modal component
+const MyCustomModal = ({ id, isOpen, data }) => {
+  const { pop } = useModal();
+
+  return (
+    <Modal
+      id={id}
+      isOpen={isOpen}
+      size="md"
+      title="My Custom Modal"
+      onClose={() => pop(id)}
+    >
+      <p>{data.message}</p>
+    </Modal>
+  );
+};
+
+// Using the modal system
+const MyPage = () => {
+  const { push } = useModal();
+
+  const openModal = () => {
+    push({
+      id: 'custom-modal',
+      component: MyCustomModal,
+      props: {
+        data: { message: 'Hello!' }
+      }
+    });
+  };
+
+  return <button onClick={openModal}>Open Modal</button>;
+};
 ```
 
 #### Modal Management
 
 ```tsx
-const MyPage = () => {
-  const { push, pop, clear } = useModal();
-
-  // Open a modal
-  const openModal = () => {
-    push({
-      id: 'my-modal',
-      component: MyCustomModal,
-      props: {
-        title: 'Hello',
-        onConfirm: () => {
-          // Handle confirmation
-        },
-      },
-    });
-  };
-
-  // Close a specific modal
-  const closeModal = () => {
-    pop('my-modal');
-  };
-
-  // Close all modals
-  const closeAllModals = () => {
-    clear();
-  };
-
+// In App.tsx
+const App = () => {
   return (
-    <div>
-      <button onClick={openModal}>Open Modal</button>
-      <button onClick={closeModal}>Close Modal</button>
-      <button onClick={closeAllModals}>Close All Modals</button>
-    </div>
+    <>
+      <Router>{/* ... */}</Router>
+      <ModalManager /> {/* Handles all modals */}
+    </>
   );
 };
 ```
