@@ -8,6 +8,7 @@ This document provides examples and documentation for all components available i
   - [Button](#button)
   - [Typography](#typography)
   - [Input](#input)
+  - [Modal](#modal)
 
 ## Core Components
 
@@ -192,4 +193,130 @@ A versatile card component for grouped content.
 <Card variant="outlined" hover className="custom-class">
   Custom card with hover
 </Card>
+```
+
+### Modal
+
+A centralized modal system that provides application-wide modal management without local state.
+
+#### Basic Usage
+
+```tsx
+// 1. Add ModalManager to your app root (e.g., App.tsx)
+import { ModalManager } from '@vevkit/vite-react';
+
+const App = () => {
+  return (
+    <>
+      {/* Your app content */}
+      <ModalManager />
+    </>
+  );
+};
+
+// 2. Create your modal component
+const MyCustomModal = ({ id, isOpen, title }) => {
+  return (
+    <Modal id={id} isOpen={isOpen} title={title}>
+      {/* Modal content */}
+    </Modal>
+  );
+};
+
+// 3. Use the modal anywhere in your app
+const MyComponent = () => {
+  const { push } = useModal();
+
+  const handleOpenModal = () => {
+    push({
+      id: 'my-modal',
+      component: MyCustomModal,
+      props: {
+        title: 'My Modal Title',
+        // any other props your modal needs
+      },
+    });
+  };
+
+  return <button onClick={handleOpenModal}>Open Modal</button>;
+};
+```
+
+#### Modal Variants
+
+```tsx
+// Basic Modal
+<Modal id="basic" isOpen={isOpen}>
+  <p>Basic modal content</p>
+</Modal>
+
+// With Title and Description
+<Modal
+  id="with-header"
+  isOpen={isOpen}
+  title="Modal Title"
+  description="This is a description of the modal"
+>
+  <p>Modal content</p>
+</Modal>
+
+// Custom Styling
+<Modal
+  id="custom"
+  isOpen={isOpen}
+  className="max-w-2xl bg-gray-100"
+>
+  <p>Custom styled modal</p>
+</Modal>
+
+// With Close Handler
+<Modal
+  id="with-close"
+  isOpen={isOpen}
+  onClose={() => {
+    // Handle close
+  }}
+>
+  <p>Modal with close handler</p>
+</Modal>
+```
+
+#### Modal Management
+
+```tsx
+const MyPage = () => {
+  const { push, pop, clear } = useModal();
+
+  // Open a modal
+  const openModal = () => {
+    push({
+      id: 'my-modal',
+      component: MyCustomModal,
+      props: {
+        title: 'Hello',
+        onConfirm: () => {
+          // Handle confirmation
+        },
+      },
+    });
+  };
+
+  // Close a specific modal
+  const closeModal = () => {
+    pop('my-modal');
+  };
+
+  // Close all modals
+  const closeAllModals = () => {
+    clear();
+  };
+
+  return (
+    <div>
+      <button onClick={openModal}>Open Modal</button>
+      <button onClick={closeModal}>Close Modal</button>
+      <button onClick={closeAllModals}>Close All Modals</button>
+    </div>
+  );
+};
 ```
