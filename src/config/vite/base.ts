@@ -1,31 +1,54 @@
-// import { defineConfig } from 'vite';
-// import react from '@vitejs/plugin-react-swc';
-// import tsconfigPaths from 'vite-tsconfig-paths';
-// import checker from 'vite-plugin-checker';
-// import tailwind from './plugins/tailwind';
-// import { resolveAliases } from './plugins/aliases';
-// import { envConfig } from './utils/env';
+import { UserConfig } from 'vite';
 
-// export default defineConfig({
-//   plugins: [
-//     react(),
-//     tsconfigPaths(),
-//     checker({ typescript: true }),
-//     tailwind(),
-//   ],
-//   resolve: {
-//     alias: resolveAliases(),
-//   },
-//   envPrefix: 'VEVKIT_',
-//   css: {
-//     postcss: {
-//       plugins: [require('autoprefixer')],
-//     },
-//   },
-//   build: {
-//     target: 'es2015',
-//     outDir: 'dist',
-//     assetsDir: 'assets',
-//     sourcemap: true,
-//   },
-// });
+interface ConfigOptions {
+  command: 'build' | 'serve';
+  mode: string;
+}
+
+export async function resolveConfig({ command, mode }: ConfigOptions): Promise<UserConfig> {
+  return {
+    base: '/',
+    
+    resolve: {
+      alias: {
+        '@': '/src',
+      },
+    },
+
+    server: {
+      port: 3000,
+      host: true,
+      open: true,
+    },
+
+    build: {
+      target: 'es2015',
+      outDir: 'dist',
+      assetsDir: 'assets',
+      sourcemap: true,
+      minify: 'esbuild',
+      cssMinify: true,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            react: ['react', 'react-dom'],
+            router: ['react-router-dom'],
+          },
+        },
+      },
+    },
+
+    css: {
+      postcss: {
+        plugins: [
+          require('tailwindcss'),
+          require('autoprefixer'),
+        ],
+      },
+    },
+
+    esbuild: {
+      logOverride: { 'this-is-undefined-in-esm': 'silent' },
+    },
+  };
+}
