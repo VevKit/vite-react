@@ -1,16 +1,4 @@
-// Type augmentation for Vite's import.meta.env
-interface ImportMetaEnv {
-  readonly VITE_APP_NAME: string;
-  readonly VITE_APP_VERSION: string;
-  readonly VITE_API_URL: string;
-  readonly VITE_API_TIMEOUT: string;
-  readonly VITE_ENABLE_ANALYTICS: string;
-}
-
-interface ImportMeta {
-  readonly env: ImportMetaEnv;
-}
-
+// src/config/env.ts
 export interface AppConfig {
   name: string;
   version: string;
@@ -24,15 +12,18 @@ export interface AppConfig {
 }
 
 export function loadEnvConfig(): AppConfig {
+  // Ensure we're in a Vite context
+  const env = import.meta?.env ?? {};
+
   return {
-    name: import.meta.env.VITE_APP_NAME || 'VevKit',
-    version: import.meta.env.VITE_APP_VERSION || '0.1.0',
-    isDev: import.meta.env.DEV,
-    isProd: import.meta.env.PROD,
-    apiUrl: import.meta.env.VITE_API_URL || 'http://localhost:8080',
-    apiTimeout: Number(import.meta.env.VITE_API_TIMEOUT || 5000),
+    name: env.VITE_APP_NAME ?? 'VevKit',
+    version: env.VITE_APP_VERSION ?? '0.1.0',
+    isDev: env.DEV ?? true,
+    isProd: env.PROD ?? false,
+    apiUrl: env.VITE_API_URL ?? 'http://localhost:8080',
+    apiTimeout: Number(env.VITE_API_TIMEOUT ?? 5000),
     features: {
-      analytics: import.meta.env.VITE_ENABLE_ANALYTICS === 'true',
+      analytics: env.VITE_ENABLE_ANALYTICS === 'true',
     },
   };
 }

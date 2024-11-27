@@ -1,8 +1,8 @@
 /// <reference types="vite/client" />
 
-import { UserConfig } from 'vite';
+import { UserConfig, loadEnv } from 'vite';
 
-import { loadEnvConfig, AppConfig } from '../env';
+import { loadEnvConfig } from '../env';
 
 interface ConfigOptions {
   command: 'build' | 'serve';
@@ -10,9 +10,11 @@ interface ConfigOptions {
 }
 
 export async function resolveConfig({ command, mode }: ConfigOptions): Promise<UserConfig> {
-  const env = loadEnvConfig();
   const isDev = mode === 'development';
   const isProd = mode === 'production';
+
+  process.env = { ...process.env, ...loadEnv(mode, process.cwd(), '') };
+  const env = loadEnvConfig();
 
   return {
     base: '/',
@@ -60,9 +62,6 @@ export async function resolveConfig({ command, mode }: ConfigOptions): Promise<U
     },
 
     css: {
-      postcss: {
-        plugins: [require('tailwindcss'), require('autoprefixer')],
-      },
       modules: {
         localsConvention: 'camelCase',
       },
