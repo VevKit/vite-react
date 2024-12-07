@@ -3,7 +3,6 @@
 import { ToastVariant } from '@/components/ui/core/toast/types';
 import { Button } from '@/components/ui/react/Button';
 import { Card } from '@/components/ui/react/Card';
-import { Container } from '@/components/ui/react/Container';
 import { Dropdown } from '@/components/ui/react/Dropdown';
 import DropdownItem from '@/components/ui/react/Dropdown/DropdownItem';
 import { Input } from '@/components/ui/react/Input';
