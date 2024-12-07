@@ -14,24 +14,28 @@ type InputSizeStyles = {
 
 export const INPUT_VARIANTS: InputVariantStyles = {
   outline: {
-    base: 'border border-input bg-background hover:border-accent-foreground focus-visible:ring-ring',
+    base: 'bg-white outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600',
     disabled: 'opacity-50 cursor-not-allowed',
-    invalid: 'border-destructive focus-visible:ring-destructive/50',
+    invalid:
+      'outline outline-1 -outline-offset-1 outline-destructive focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-destructive',
   },
   filled: {
-    base: 'border-2 border-transparent bg-muted hover:bg-muted/80 focus-visible:ring-ring',
+    base: 'outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 bg-muted',
     disabled: 'opacity-50 cursor-not-allowed',
-    invalid: 'bg-destructive/10 focus-visible:ring-destructive/50',
+    invalid:
+      'outline outline-1 -outline-offset-1 outline-destructive focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-destructive',
   },
   flushed: {
-    base: 'rounded-none border-b border-input hover:border-accent-foreground focus-visible:border-primary',
+    base: 'rounded-none border-b border-input focus-visible:border-primary',
     disabled: 'opacity-50 cursor-not-allowed',
-    invalid: 'border-destructive focus-visible:border-destructive',
+    invalid:
+      'outline outline-1 -outline-offset-1 outline-destructive focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-destructive',
   },
   unstyled: {
-    base: 'border-none bg-transparent hover:bg-transparent',
+    base: 'border-none bg-transparent',
     disabled: 'opacity-50 cursor-not-allowed',
-    invalid: 'text-destructive',
+    invalid:
+      'outline outline-1 -outline-offset-1 outline-destructive focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-destructive',
   },
 } as const;
 

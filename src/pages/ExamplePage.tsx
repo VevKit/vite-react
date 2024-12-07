@@ -2,7 +2,10 @@
 // import { ModalEntry } from '@/components/ui/core/modal';
 import { ToastVariant } from '@/components/ui/core/toast/types';
 import { Button } from '@/components/ui/react/Button';
+import { Card } from '@/components/ui/react/Card';
 import { Container } from '@/components/ui/react/Container';
+import { Input } from '@/components/ui/react/Input';
+import { Loader } from '@/components/ui/react/Loader';
 import { useModal, Modal } from '@/components/ui/react/Modal';
 import { useToast } from '@/components/ui/react/Toast';
 import { Typography } from '@/components/ui/react/Typography';
@@ -81,6 +84,45 @@ const ExamplePage = () => {
             <Button onClick={() => handleToast('error')}>Toast Error</Button>
             <Button onClick={() => handleToast('warning')}>Toast Warning</Button>
             <Button onClick={() => handleToast('loading')}>Toast Loading</Button>
+          </div>
+        </section>
+
+        <section>
+          <Typography variant="h2" className="mb-4">
+            Loading Indicator Example
+          </Typography>
+          <div className="flex space-x-4">
+            <Loader />
+            <Loader label="Saving data..." variant="dots" />
+          </div>
+          <Loader size="sm" variant="spinner" />
+          <Loader size="md" variant="processing" />
+          <Loader size="lg" variant="installing" />
+        </section>
+
+        <section>
+          <Typography variant="h2" className="mb-4">
+            Card Example
+          </Typography>
+          <Card>
+            <Typography variant="h3">Card Title</Typography>
+            <Typography variant="body1">Card content goes here</Typography>
+          </Card>
+        </section>
+
+        <section>
+          <Typography variant="h2" className="mb-4">
+            Input Examples
+          </Typography>
+          <div className="flex flex-col space-y-4 w-40">
+            <Typography variant="body1">Default</Typography>
+            <Input />
+            <Typography variant="body1">Filled</Typography>
+            <Input size="lg" isInvalid error="This is an error" variant="filled" />
+            <Typography variant="body1">Flushed</Typography>
+            <Input variant="flushed" />
+            <Typography variant="body1">Unstyled</Typography>
+            <Input variant="unstyled" />
           </div>
         </section>
       </div>
