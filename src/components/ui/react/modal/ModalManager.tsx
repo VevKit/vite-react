@@ -1,16 +1,21 @@
-// src/components/ui/react/Modal/ModalManager.tsx
-import type { ReactElement } from 'react';
+import { useState, useEffect, type ReactElement } from 'react';
 
-import { Modal } from './Modal'; // This is our base Modal component
-import { useModal } from './useModal';
+import { modalStore } from '@/components/ui/core/modal/store';
 
 export const ModalManager = (): ReactElement => {
-  const { stack } = useModal();
+  const [stack, setStack] = useState(modalStore.getStack());
+
+  useEffect(() => {
+    const unsubscribe = modalStore.subscribe(setStack);
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   return (
     <>
       {stack.map(({ id, component: Component, props }) => (
-        <Component key={id} id={id} isOpen={true} {...props} />
+        <Component key={id} id={id} isOpen={true} onClose={() => modalStore.pop(id)} {...props} />
       ))}
     </>
   );

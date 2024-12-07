@@ -1,4 +1,10 @@
-// src/components/ui/core/modal/types.ts
+export type ModalSize = 'sm' | 'md' | 'lg' | 'full';
+
+export interface ModalStyleProps {
+  size: ModalSize;
+  fullScreen: boolean;
+  isOpen: boolean;
+}
 
 export interface ModalConfig {
   id: string;
@@ -7,24 +13,12 @@ export interface ModalConfig {
   onClose?: () => void;
 }
 
-export interface ModalEntry extends ModalConfig {
+export interface ModalBaseProps {
+  id: string;
   isOpen: boolean;
-}
-
-export interface ModalStore {
-  getStack: () => ModalEntry[];
-  subscribe: (callback: (stack: ModalEntry[]) => void) => () => void;
-  push: (config: ModalConfig) => void;
-  pop: (id: string) => void;
-  clear: () => void;
-}
-
-export interface ModalVariants {
-  size: 'sm' | 'md' | 'lg' | 'xl' | 'full';
-  position: 'center' | 'top' | 'right' | 'bottom' | 'left';
-}
-
-export interface ModalStyleProps extends ModalVariants {
-  isFullScreen?: boolean;
-  noPadding?: boolean;
+  size?: ModalSize;
+  fullScreen?: boolean;
+  title?: string;
+  description?: string;
+  onClose?: () => void;
 }

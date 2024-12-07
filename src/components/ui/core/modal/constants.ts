@@ -1,26 +1,19 @@
-// src/components/ui/core/modal/constants.ts
-import type { ModalVariants } from './types';
+import type { ModalSize } from './types';
 
 type ModalSizeStyles = {
-  [K in ModalVariants['size']]: string;
-};
-
-type ModalPositionStyles = {
-  [K in ModalVariants['position']]: string;
+  [K in ModalSize]: string;
 };
 
 export const MODAL_SIZES: ModalSizeStyles = {
   sm: 'max-w-sm',
   md: 'max-w-lg',
   lg: 'max-w-2xl',
-  xl: 'max-w-4xl',
-  full: 'max-w-full mx-4',
+  full: 'max-w-[calc(100%-2rem)]',
 } as const;
 
-export const MODAL_POSITIONS: ModalPositionStyles = {
-  center: 'left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]',
-  top: 'left-[50%] top-4 translate-x-[-50%]',
-  right: 'right-4 top-[50%] translate-y-[-50%]',
-  bottom: 'left-[50%] bottom-4 translate-x-[-50%]',
-  left: 'left-4 top-[50%] translate-y-[-50%]',
+export const MODAL_BASE_STYLES = {
+  overlay: 'fixed inset-0 bg-black/50 backdrop-blur-sm z-50',
+  container: 'fixed left-[50%] top-[50%] z-50 translate-x-[-50%] translate-y-[-50%]',
+  content: 'w-full rounded-lg bg-background shadow-lg',
+  fullScreen: 'fixed inset-4',
 } as const;

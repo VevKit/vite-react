@@ -1,126 +1,110 @@
-// src/components/ui/react/Modal/Modal.tsx
-import type { ReactElement } from 'react';
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useRef, type ReactElement } from 'react';
 
-import { MODAL_SIZES, MODAL_POSITIONS } from '@/components/ui/core/modal/constants';
-import type { ModalStyleProps } from '@/components/ui/core/modal/types';
+import { modalStore } from '@/components/ui/core/modal/store';
+import { getModalStyles } from '@/theme/variants/modal';
 import { cn } from '@/utils/styles';
 
-interface ModalProps extends Partial<ModalStyleProps> {
-  id: string;
-  isOpen: boolean;
-  title?: string;
-  description?: string;
-  children: React.ReactNode;
-  className?: string;
-  onClose?: () => void;
-}
+import type { ModalProps } from './types';
 
-export const Modal = ({
+const Modal = ({
   id,
   isOpen,
+  size = 'md',
+  fullScreen = false,
   title,
   description,
+  onClose = () => modalStore.pop(id),
   children,
   className,
-  onClose,
-  size = 'md',
-  position = 'center',
-  isFullScreen = false,
-  noPadding = false,
 }: ModalProps): ReactElement | null => {
-  const handleClose = useCallback(() => {
-    onClose?.();
-  }, [onClose]);
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  // Handle escape key
+  const handleEscape = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen && onClose) {
+        onClose();
+      }
+    },
+    [isOpen, onClose]
+  );
+
+  // Handle click outside
+  const handleClickOutside = useCallback(
+    (e: MouseEvent) => {
+      if (modalRef.current && !modalRef.current.contains(e.target as Node) && onClose) {
+        onClose();
+      }
+    },
+    [onClose]
+  );
 
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) {
-        handleClose();
-      }
-    };
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape);
+      // Add click listener after a small delay to prevent immediate closing
+      const timeoutId = setTimeout(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+      }, 100);
 
-    window.addEventListener('keydown', handleEscape);
-    return () => window.removeEventListener('keydown', handleEscape);
-  }, [isOpen, handleClose]);
+      document.body.style.overflow = 'hidden';
+
+      return () => {
+        document.removeEventListener('keydown', handleEscape);
+        document.removeEventListener('mousedown', handleClickOutside);
+        clearTimeout(timeoutId);
+      };
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen, handleEscape, handleClickOutside]);
+
+  const styles = getModalStyles({ size, fullScreen, isOpen });
 
   if (!isOpen) return null;
 
   return (
     <>
       {/* Backdrop */}
-      <div
-        className={cn(
-          'fixed inset-0 bg-black/50 backdrop-blur-sm z-50',
-          'transition-opacity duration-200',
-          isOpen ? 'opacity-100' : 'opacity-0'
-        )}
-        onClick={handleClose}
-        aria-hidden="true"
-      />
+      <div className={cn(styles.overlay.base, styles.overlay.state)} aria-hidden="true" />
 
       {/* Modal */}
       <div
+        ref={modalRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby={title ? `${id}-title` : undefined}
         aria-describedby={description ? `${id}-description` : undefined}
-        className={cn(
-          'fixed z-50',
-          'bg-white rounded-lg shadow-lg',
-          'focus:outline-none',
-          'transition-all duration-200',
-          MODAL_POSITIONS[position],
-          !isFullScreen && MODAL_SIZES[size],
-          isFullScreen && 'fixed inset-4',
-          !noPadding && 'p-6',
-          className
-        )}
-        onClick={(e) => e.stopPropagation()}
+        className={cn(styles.container.base, styles.container.size, styles.container.state)}
       >
-        {/* Close button */}
-        <button
-          onClick={handleClose}
-          className={cn(
-            'absolute top-4 right-4',
-            'w-8 h-8 flex items-center justify-center',
-            'rounded-full bg-gray-100 hover:bg-gray-200',
-            'transition-colors duration-200'
+        <div className={cn(styles.content, 'p-6', className)}>
+          {/* Header */}
+          {(title || description) && (
+            <div className="mb-6">
+              {title && (
+                <h2
+                  id={`${id}-title`}
+                  className="text-lg font-semibold leading-none tracking-tight"
+                >
+                  {title}
+                </h2>
+              )}
+              {description && (
+                <p id={`${id}-description`} className="mt-2 text-sm text-muted-foreground">
+                  {description}
+                </p>
+              )}
+            </div>
           )}
-          aria-label="Close modal"
-        >
-          <svg
-            className="w-4 h-4"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
 
-        {/* Header */}
-        {(title || description) && (
-          <div className={cn('mb-4', !noPadding && 'pr-8')}>
-            {title && (
-              <h2 id={`${id}-title`} className="text-lg font-semibold leading-none tracking-tight">
-                {title}
-              </h2>
-            )}
-            {description && (
-              <p id={`${id}-description`} className="mt-2 text-sm text-gray-500">
-                {description}
-              </p>
-            )}
-          </div>
-        )}
-
-        {/* Content */}
-        <div>{children}</div>
+          {/* Content */}
+          {children}
+        </div>
       </div>
     </>
   );
 };
+
+export default Modal;

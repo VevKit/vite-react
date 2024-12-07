@@ -1,4 +1,4 @@
-import { useEffect, type ReactElement } from 'react';
+import { type ReactElement } from 'react';
 
 import { getToastStyles } from '@/theme/variants/toast';
 import { cn } from '@/utils/styles';
@@ -18,6 +18,7 @@ const Toast = ({
 
   return (
     <div
+      id={id}
       className={cn(styles.base, styles.variant, styles.state, 'flex items-start gap-3', className)}
       role="alert"
     >
