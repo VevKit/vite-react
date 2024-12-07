@@ -44,3 +44,29 @@ export const TOAST_POSITIONS: ToastPositionStyles = {
 
 export const TOAST_BASE_STYLES =
   'relative rounded-lg border p-4 shadow-md min-w-[300px] max-w-[500px]' as const;
+
+type ToastAnimationStyles = {
+  [K in ToastPosition]: {
+    enter: string;
+    exit: string;
+  };
+};
+
+export const TOAST_ANIMATIONS: ToastAnimationStyles = {
+  'top-right': {
+    enter: 'animate-in fade-in-0 slide-in-from-right-full duration-300',
+    exit: 'animate-out fade-out-0 slide-out-to-right-full duration-200',
+  },
+  'top-left': {
+    enter: 'animate-in fade-in-0 slide-in-from-left-full duration-300',
+    exit: 'animate-out fade-out-0 slide-out-to-left-full duration-200',
+  },
+  'bottom-right': {
+    enter: 'animate-in fade-in-0 slide-in-from-right-full duration-300',
+    exit: 'animate-out fade-out-0 slide-out-to-right-full duration-200',
+  },
+  'bottom-left': {
+    enter: 'animate-in fade-in-0 slide-in-from-left-full duration-300',
+    exit: 'animate-out fade-out-0 slide-out-to-left-full duration-200',
+  },
+} as const;

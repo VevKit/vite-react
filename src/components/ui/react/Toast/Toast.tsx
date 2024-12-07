@@ -1,26 +1,39 @@
-import { type ReactElement } from 'react';
+import { type ReactElement, useEffect } from 'react';
 
 import { getToastStyles } from '@/theme/variants/toast';
 import { cn } from '@/utils/styles';
 
 import type { ToastProps } from './types';
+import { toastStore } from '../../core/toast/store';
 
 const Toast = ({
   id,
   title,
   message,
   variant,
+  position = 'top-right',
   visible,
-  onClose,
+  onClose = () => toastStore.remove(id),
+  duration = 5000,
   className,
+  style,
 }: ToastProps): ReactElement => {
-  const styles = getToastStyles({ variant, visible });
+  const styles = getToastStyles({ variant, position, visible });
+
+  useEffect(() => {
+    if (duration) {
+      setTimeout(() => {
+        onClose();
+      }, duration);
+    }
+  }, [duration, onClose]);
 
   return (
     <div
       id={id}
       className={cn(styles.base, styles.variant, styles.state, 'flex items-start gap-3', className)}
       role="alert"
+      style={style}
     >
       {/* Variant Icon */}
       <div className={cn(styles.icon, 'mt-0.5')}>

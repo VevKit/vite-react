@@ -6,12 +6,14 @@ export interface ToastConfig {
   title?: string;
   message: string;
   variant: ToastVariant;
+  position?: ToastPosition;
   duration?: number;
   onClose?: () => void;
 }
 
 export interface ToastStyleProps {
   variant: ToastVariant;
+  position: ToastPosition;
   visible: boolean;
 }
 

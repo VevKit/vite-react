@@ -27,11 +27,16 @@ const ToastContainer = ({
 
   return (
     <div className={cn('fixed z-50 flex flex-col gap-2', TOAST_POSITIONS[position], className)}>
-      {toasts.map((toast) => (
+      {toasts.map((toast, index) => (
         <Toast
           key={toast.id}
           {...toast}
           visible={true}
+          style={{
+            // Add stagger effect
+            animationDelay: `${index * 100}ms`,
+            transition: 'all 0.3s ease-in-out',
+          }}
           onClose={() => toastStore.remove(toast.id)}
         />
       ))}

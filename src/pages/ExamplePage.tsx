@@ -1,7 +1,10 @@
 // src/pages/ExamplePage.tsx
 // import { ModalEntry } from '@/components/ui/core/modal';
+import { ToastVariant } from '@/components/ui/core/toast/types';
 import { Button } from '@/components/ui/react/Button';
+import { Container } from '@/components/ui/react/Container';
 import { useModal, Modal } from '@/components/ui/react/Modal';
+import { useToast } from '@/components/ui/react/Toast';
 import { Typography } from '@/components/ui/react/Typography';
 
 const ExampleModal = ({ id, isOpen }: { id: string; isOpen: boolean }) => {
@@ -25,11 +28,20 @@ const ExampleModal = ({ id, isOpen }: { id: string; isOpen: boolean }) => {
 
 const ExamplePage = () => {
   const { push } = useModal();
+  const toast = useToast();
 
   const handleOpenModal = () => {
     push({
       id: 'example-modal',
       component: ExampleModal,
+    });
+  };
+
+  const handleToast = (variant: ToastVariant) => {
+    toast.show({
+      title: 'Operation completed successfully',
+      message: 'This is a custom message',
+      variant,
     });
   };
 
@@ -58,6 +70,18 @@ const ExamplePage = () => {
             Modal Example
           </Typography>
           <Button onClick={handleOpenModal}>Open Modal</Button>
+        </section>
+
+        <section className="flex flex-col space-y-4 items-start">
+          <Typography variant="h2" className="mb-4">
+            Toast Example
+          </Typography>
+          <div className="flex space-x-4">
+            <Button onClick={() => handleToast('success')}>Toast Success</Button>
+            <Button onClick={() => handleToast('error')}>Toast Error</Button>
+            <Button onClick={() => handleToast('warning')}>Toast Warning</Button>
+            <Button onClick={() => handleToast('loading')}>Toast Loading</Button>
+          </div>
         </section>
       </div>
     </div>

@@ -41,7 +41,43 @@ export default {
           light: 'rgb(var(--neutral-light) / <alpha-value>)',
           dark: 'rgb(var(--neutral-dark) / <alpha-value>)'
         }
-      }
+      },
+      keyframes: {
+        // Slide animations
+        'slide-in-from-right-full': {
+          '0%': { transform: 'translateX(100%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
+        'slide-out-to-right-full': {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(100%)' },
+        },
+        'slide-in-from-left-full': {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
+        'slide-out-to-left-full': {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+        // Scale animations
+        'scale-in': {
+          '0%': { transform: 'scale(0.95)', opacity: '0' },
+          '100%': { transform: 'scale(1)', opacity: '1' },
+        },
+        'scale-out': {
+          '0%': { transform: 'scale(1)', opacity: '1' },
+          '100%': { transform: 'scale(0.95)', opacity: '0' },
+        },
+      },
+      animation: {
+        'slide-in-right': 'slide-in-from-right-full 0.3s ease-out',
+        'slide-out-right': 'slide-out-to-right-full 0.2s ease-in',
+        'slide-in-left': 'slide-in-from-left-full 0.3s ease-out',
+        'slide-out-left': 'slide-out-to-left-full 0.2s ease-in',
+        'scale-in': 'scale-in 0.2s ease-out',
+        'scale-out': 'scale-out 0.2s ease-in',
+      },
     },
   },
   plugins: [],
