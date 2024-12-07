@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 
+import { getCardStyles } from '@/theme/variants/card';
 import { cn } from '@/utils/styles';
 
 import type { CardProps } from './types';
@@ -12,23 +13,11 @@ const Card = ({
   children,
   ...props
 }: CardProps): ReactElement => {
-  const baseStyles = 'rounded-lg transition-shadow';
-
-  const variantStyles = {
-    elevated: 'bg-card shadow-sm',
-    outlined: 'border border-border bg-background',
-    filled: 'bg-muted',
-  };
+  const styles = getCardStyles({ variant, padding, hover });
 
   return (
     <div
-      className={cn(
-        baseStyles,
-        variantStyles[variant],
-        padding && 'p-6',
-        hover && 'hover:shadow-md',
-        className
-      )}
+      className={cn(styles.base, styles.variant, styles.padding, styles.hover, className)}
       {...props}
     >
       {children}
