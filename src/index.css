@@ -4,18 +4,38 @@
 @tailwind utilities;
 
 :root {
-  --primary: 15 23 42;
+  /* Primary: Baltic Blue */
+  --primary: 41 128 185; /* #2980B9 */
+  --primary-light: 52 152 219; /* #3498DB - Lighter shade for hover */
+  --primary-dark: 31 97 141; /* Darker shade for active/pressed */
   --primary-foreground: 255 255 255;
-  --secondary: 241 245 249;
-  --secondary-foreground: 15 23 42;
-  --destructive: 239 68 68;
+
+  /* Secondary: Warm granite */
+  --secondary: 120 113 108;
+  --secondary-light: 156 163 175;
+  --secondary-dark: 87 83 78;
+  --secondary-foreground: 255 255 255;
+
+  /* Accent: Nordic pine */
+  --accent: 104 121 110;
+  --accent-light: 134 151 140;
+  --accent-dark: 74 91 80;
+  --accent-foreground: 255 255 255;
+
+  /* Destructive: Lingonberry red */
+  --destructive: 190 62 62;
+  --destructive-light: 220 92 92;
+  --destructive-dark: 160 32 32;
   --destructive-foreground: 255 255 255;
-  --muted: 226 232 240;
-  --muted-foreground: 100 116 139;
-  --accent: 248 250 252;
-  --accent-foreground: 15 23 42;
-  --background: 255 255 255;
-  --foreground: 15 23 42;
+
+  /* Background */
+  --background: 250 249 246;
+  --background-subtle: 241 240 237;
+
+  /* Neutral */
+  --neutral: 107 114 128;
+  --neutral-light: 156 163 175;
+  --neutral-dark: 75 85 99;
 }
 
 html,
