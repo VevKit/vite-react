@@ -15,8 +15,8 @@ const DropdownItem = ({
       onClick={disabled ? undefined : onClick}
       className={cn(
         'relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none',
-        'hover:bg-accent hover:text-accent-foreground',
-        'focus:bg-accent focus:text-accent-foreground',
+        'hover:bg-primary hover:text-primary-foreground',
+        'focus:bg-primary focus:text-primary-foreground',
         disabled && 'opacity-50 cursor-not-allowed',
         className
       )}

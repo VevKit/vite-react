@@ -4,8 +4,11 @@ import { ToastVariant } from '@/components/ui/core/toast/types';
 import { Button } from '@/components/ui/react/Button';
 import { Card } from '@/components/ui/react/Card';
 import { Container } from '@/components/ui/react/Container';
+import { Dropdown } from '@/components/ui/react/Dropdown';
+import DropdownItem from '@/components/ui/react/Dropdown/DropdownItem';
 import { Input } from '@/components/ui/react/Input';
 import { Loader } from '@/components/ui/react/Loader';
+import { Menu, MenuGroup, MenuItem } from '@/components/ui/react/Menu';
 import { useModal, Modal } from '@/components/ui/react/Modal';
 import { useToast } from '@/components/ui/react/Toast';
 import { Typography } from '@/components/ui/react/Typography';
@@ -124,6 +127,38 @@ const ExamplePage = () => {
             <Typography variant="body1">Unstyled</Typography>
             <Input variant="unstyled" />
           </div>
+        </section>
+
+        <section>
+          <Typography variant="h2" className="mb-4">
+            Dropdown Example
+          </Typography>
+          <Dropdown trigger={<Button>Open Menu</Button>} position="bottom" align="start">
+            <DropdownItem onClick={() => console.log('Item 1')}>Menu Item 1</DropdownItem>
+            <DropdownItem onClick={() => console.log('Item 2')}>Menu Item 2</DropdownItem>
+            <DropdownItem disabled>Disabled Item</DropdownItem>
+          </Dropdown>
+        </section>
+
+        <section>
+          <Typography variant="h2" className="mb-4">
+            Menu Example
+          </Typography>
+          <Menu label="File">
+            <MenuGroup label="Actions">
+              <MenuItem
+                icon="📄"
+                label="New File"
+                shortcut="⌘N"
+                onClick={() => console.log('New')}
+              />
+              <MenuItem icon="📁" label="Open" shortcut="⌘O" onClick={() => console.log('Open')} />
+            </MenuGroup>
+            <MenuGroup label="Recent">
+              <MenuItem label="document.txt" onClick={() => console.log('Open recent')} />
+            </MenuGroup>
+            <MenuItem icon="🗑️" label="Delete" destructive onClick={() => console.log('Delete')} />
+          </Menu>
         </section>
       </div>
     </div>

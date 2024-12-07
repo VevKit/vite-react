@@ -14,7 +14,7 @@ type MenuAlignStyles = {
 export const MENU_VARIANTS: MenuVariantStyles = {
   default: {
     container: 'bg-background shadow-lg ring-1 ring-black/5',
-    item: 'hover:bg-accent hover:text-accent-foreground',
+    item: 'hover:bg-primary hover:text-primary-foreground',
   },
   bordered: {
     container: 'bg-background border border-border',

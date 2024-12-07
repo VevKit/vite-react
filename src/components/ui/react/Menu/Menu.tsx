@@ -43,8 +43,8 @@ const Menu = ({
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
           'flex items-center space-x-2 rounded-sm px-2 py-1.5',
-          'hover:bg-accent hover:text-accent-foreground',
-          'focus:bg-accent focus:text-accent-foreground'
+          'hover:bg-primary hover:text-primary-foreground',
+          'focus:bg-primary focus:text-primary-foreground'
         )}
       >
         {icon && <span className="h-4 w-4">{icon}</span>}
