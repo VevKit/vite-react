@@ -1,6 +1,6 @@
 {
   "name": "@vevkit/vite-react",
-  "version": "0.1.1",
+  "version": "1.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -51,5 +51,13 @@
     "extends": [
       ".eslintrc.cjs"
     ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VevKit/vite-react.git"
+  },
+  "homepage": "https://github.com/VevKit/vite-react#readme",
+  "bugs": {
+    "url": "https://github.com/VevKit/vite-react/issues"
   }
 }
